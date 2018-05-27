@@ -1,0 +1,93 @@
+{% extends 'partials/_master.twig' %}
+
+{# Main (full-width) content block #}
+{% block main %}
+	{% if theme.homepagetype == 1 %}
+		{# Dynamic homepage #}
+		<div class="homepage">
+			{% setcontent entries = 'entries/latest/3' %}
+			<!-- Featured items -->
+			<div class="featured-items">
+				<div class="featured-wrapper main">
+				{% set mainItem = entries|first %}
+	            <article role="article" class="featured">
+	        		{% if mainItem.image!="" %}
+	        		<div class="gradient-overlay">
+						<img src="{{ mainItem.image|thumbnail(720, 360) }}">
+					</div>
+					{% endif %}
+					<a href="{{ mainItem.link }}" class="link-overlay"></a>
+					<h3 class="text-overlay">
+	               		<a href="{{ mainItem.link }}">{{ mainItem.title }}</a>
+					</h3>
+					<div class="background-overlay"></div>
+	            </article>
+				</div>
+				<div class="featured-wrapper">
+				{% for entry in entries|slice(1, entries|length) %}
+	            <article role="article" class="featured">
+	        		{% if entry.image!="" %}
+	        		<div class="gradient-overlay">
+						<img src="{{ entry.image|thumbnail(720, 360) }}">
+					</div>
+					{% endif %}
+					<a href="{{ entry.link }}" class="link-overlay"></a>
+					<h3 class="text-overlay">
+	               		<a href="{{ entry.link }}">{{ entry.title }}</a>
+					</h3>
+	            </article>
+	            {% endfor %}
+				</div>
+			</div>
+		</div>
+	{% elseif theme.homepagetype == 2 %}
+		{# Static homepage #}
+
+	    {% if record is defined %}
+
+	        <h1>{{ record.title }}</h1>
+
+	        {# Remove this block if you don't need it anymore. #}
+	        {{ include('partials/_fresh_install.twig') }}
+
+	        {{ record.teaser }}
+
+	        {{ popup(record.image, 1200, 500) }}
+
+	        {{ record.body }}
+
+	        {{ include('partials/_recordfooter.twig', { 'record': record }) }}
+
+	    {% endif %}
+
+	{% endif %}
+{% endblock %}
+
+{# Left column content block #}
+{% block left_col %}
+
+{% setcontent entries = 'entries/latest/10' %}
+{% set entries = entries|slice(4, entries|length) %}
+
+{% if entries %}
+	<div class="card-list">
+	{% for entry in entries %}
+	<div class="item">
+		<article>
+	   		<div class="gradient-overlay">
+				<img src="{{ thumbnail(record.image, 400, 260) }}">
+			</div>
+			<a href="{{ entry.link }}" class="link-overlay"></a>
+			<div class="text-overlay">
+				<h3>
+		       		<a href="{{ entry.link }}">{{ entry.title }}</a>
+				</h3>
+			</div>
+		</article>
+	</div>
+	{% endfor %}
+	</div>
+{% endif %}
+
+
+{% endblock %}

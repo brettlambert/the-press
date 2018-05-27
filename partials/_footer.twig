@@ -1,0 +1,28 @@
+<!-- Footer -->
+<footer class="main-footer">
+
+    <div class="footer-nav-search-wrapper">
+
+        <nav class="footer-nav">
+            {{ menu(template = 'partials/_sub_menu.twig') }}
+        </nav>
+
+        <div class="search-box">
+            <form method="get" action="{{ path('search') }}" id="searchform-inline" enctype="text/plain">
+                <div class="search-form">
+                    <div class="input-wrapper"><input type="search" value="{{ search|default() }}" placeholder="{{ __('general.phrase.search-ellipsis') }}" name="search" ></div>
+                    <div class="btn-wrapper"><button type="submit" class="btn secondary">{{ __('general.phrase.search') }}</button></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="legal-disclaimers">
+        <div>{{ __("This website is <a href='%url%' target='_blank' title='Sophisticated, lightweight & simple CMS'>Built with Bolt</a>.",{'%url%':'http://bolt.cm'}) }}</div>
+        <div></div>
+    </div>
+
+    {{ widgets('footer') }}
+
+</footer>

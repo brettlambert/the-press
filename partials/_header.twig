@@ -1,0 +1,31 @@
+<!-- Header bar -->
+
+{# You can either hardcode the filename for the header logo, or use the configured one in the /theme/foundation/theme.yml file. #}
+
+{% set headerlogo = asset('images/' ~ theme.headerlogo, 'theme') %}
+
+<header class="main-header">
+	<div class="inner">
+	    {# the values in the 'config' object are taken directly from the file app/config/config.yml #}
+	    <div class="logo">
+		    {% if headerlogo %}
+		    	<a href="{{ path('homepage') }}">
+		    		<img src="{{ headerlogo }}" alt="{{ config.get('general/sitename') ~ ' ' ~ config.get('general/payoff') }}">
+		    	</a>
+		    {% else %}
+		   		<h2>
+		   			<a href="{{ path('homepage') }}">{{ config.get('general/sitename') ~ ' ' ~ config.get('general/payoff') }}</a>
+		   		</h2>
+		    {% endif %}
+		</div>
+
+		<nav class="main-nav">
+	 		{{ menu(template = 'partials/_sub_menu.twig', params = { navclose: true}) }}
+	 		<div class="nav-toggle">
+		 		<button class="navbar-burger">
+		 			<i class="fa fa-navicon"></i>
+		 		</button>
+	 		</div>
+    	</nav>
+    </div>
+</header>

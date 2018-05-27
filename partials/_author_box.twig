@@ -1,0 +1,10 @@
+<div class="author-box">
+	<div class="author-name">
+	    {{ __('general.phrase.written-by-on', {
+	        '%name%': record.user.displayname|default(__('Unknown')),
+	        '%date%': record.datepublish|localedatetime("%A %B %e, %Y")
+	    }) }}
+	</div>
+
+	{% include 'partials/_social_sharing.twig' with { record: record } %}
+</div>

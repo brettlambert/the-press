@@ -1,0 +1,20 @@
+<div class="social-sharing">
+	<span class="sharing-title">
+		Share
+	</span>
+	<a href="https://www.facebook.com/sharer/sharer.php?u={{ record.link|url_encode }}" class="network facebook">
+		<i class="fa fa-facebook"></i>
+	</a>
+	<a href="https://www.twitter.com/home?status={{ record.link ~ 'via' ~ config.get('general/sitename')|url_encode }}" class="network twitter">
+		<i class="fa fa-twitter"></i>
+	</a>
+	<a href="https://plus.google.com/share?url={{ record.link|url_encode }}" class="network gplus">
+		<i class="fa fa-google-plus"></i>
+	</a>
+	<a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ record.link|url_encode }}&amp;title={{ record.title|url_encode }}&amp;summary={{ record.teaser|url_encode }}&amp;source={{ config.get('general/sitename')|url_encode }}" class="network linkedin">
+		<i class="fa fa-linkedin"></i>
+	</a>
+	<a href="{{ record.link }}" class="network link">
+		<i class="fa fa-link"></i>
+	</a>
+</div>

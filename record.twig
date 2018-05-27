@@ -1,0 +1,37 @@
+{% extends 'partials/_master.twig' %}
+
+{% block left_col %}
+
+    <div class="record-page">
+
+        {% if record.editlink() %}
+        <div class="edit-link">
+            <a href="{{ record.editlink() }}" class="btn secondary small">
+                {{ __('general.phrase.edit') }}
+            </a>
+        </div>
+        {% endif %}
+        
+        <h1>{{ record.title }}</h1>
+
+        <!-- Author Box -->
+        {% include 'partials/_author_box.twig' with { 'record': record } %}
+
+        {# Output all fields, in the order as defined in the contenttype.
+           To change the generated html and configure the options, see:
+           https://docs.bolt.cm/templating #}
+        <article>
+        {% with { 'record': record, 'common': true, 'extended': true, 'repeaters': true, 'blocks': true } %}
+            {{ block('sub_fields', 'partials/_sub_fields.twig') }}
+        {% endwith %}
+
+        {# Uncomment this if you wish to dump the entire record to the client, for debugging purposes.
+        {{ dump(record) }}
+        #}
+
+        {% include 'partials/_recordfooter.twig' with { 'record': record, 'extended': true } %}
+        </article>
+    </div>
+
+
+{% endblock left_col %}

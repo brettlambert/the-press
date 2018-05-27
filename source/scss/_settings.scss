@@ -1,0 +1,74 @@
+// ------------ SASS Settings for theme ---------------
+$max-content-width: 1440px;
+
+$primary-font-stack:'Roboto', sans-serif;
+$secondary-font-stack:'Bitter', serif;
+
+$default-font-size:16px;
+
+$brand-primary:#2a347d;
+$brand-primary-alt:darken($brand-primary, 10%);
+$brand-secondary:#ff9900;
+$brand-secondary-alt:darken($brand-secondary, 10%);
+
+$brand-gray:#31343f;
+$brand-gray-med:#505468;
+$brand-gray-light:#d8dbe5;
+
+$text-color-primary:#333;
+$text-med-gray:$brand-gray-med;
+$text-light-gray:darken($brand-gray-light, 10%);
+
+$body-bkg:#f4f7ff;
+
+$social-facebook:#4867aa;
+$social-twitter:#1da1f2;
+$social-gplus:#dd5144;
+$social-linkedin:#0077b5;
+
+$break-large:1000px;
+$break-med:800px;
+$break-small:550px;
+
+// ------------ Mixins used for theme styling ---------------
+
+@mixin css3-prefix($property, $value) {
+  -webkit-#{$property}: #{$value};
+   -khtml-#{$property}: #{$value};
+     -moz-#{$property}: #{$value};
+      -ms-#{$property}: #{$value};
+       -o-#{$property}: #{$value};
+          #{$property}: #{$value};
+}
+
+@mixin aspect-ratio($width, $height) {
+	position: relative;
+	&:before {
+		display: block;
+		content: "";
+		width: 100%;
+		padding-top: ($height / $width) * 100%;
+	}
+	> .inner-content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+@mixin linearGradient($top, $bottom){
+    background: $top; /* Old browsers */
+    background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin border-radius($radius: 5px) {
+	@include css3-prefix('border-radius', $radius);
+}

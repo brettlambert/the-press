@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{ htmllang() }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {# make sure we always display a proper title: The record's title if there is one, appended with the
+           sitename. If there is no title, we append the sitename with the payoff, if there is one. #}
+        <title>
+            {%- if record.title is defined %}{{ record.title|striptags }} | {% endif -%}
+                {{ config.get('general/sitename') -}}
+            {% if record.title is not defined and config.get('general/payoff') %} | {{ config.get('general/payoff') }}{% endif -%}
+        </title>
+        <link rel="stylesheet" href="{{ asset('css/normalize.css', 'theme') }}">
+        <link rel="stylesheet" href="{{ asset('css/theme.css', 'theme') }}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+
+        {% block body %}
+
+            {{ include('partials/_header.twig') }}
+
+
+            <!-- Main Content -->
+            <div class="content" role="main">
+
+                {{ widgets('main_top') }}
+
+                {% block main %}
+                {% endblock main %}
+
+                <!-- Left Column -->
+                <div class="left-col">
+                    {% block left_col %}
+                    {% endblock left_col %}
+                </div>
+
+                <!-- Right Column -->
+                <div class="right-col">
+                    {{ include('partials/_aside.twig') }}
+                </div>
+
+                <!-- Clearfix -->
+                <div class="clear"></div>
+
+                {{ widgets('main_bottom') }}
+            </div>
+
+
+        {% endblock body %}
+
+        {{ include('partials/_footer.twig') }}
+
+        <script type="text/javascript" src="{{ asset('js/app.js', 'theme') }}"></script>
+
+    </body>
+</html>
